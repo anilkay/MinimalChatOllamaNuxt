@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Nuxt 3 Based Basic Ollama Chat UI
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+
 
 ## Setup
 
@@ -40,8 +40,9 @@ bun run dev
 
 ## Production
 
-Build the application for production:
 
+Build the application for production:
+### Classical Nuxt way
 ```bash
 # npm
 npm run build
@@ -56,20 +57,11 @@ yarn build
 bun run build
 ```
 
-Locally preview production build:
+### docker
+docker build -t minimal_chat_ollama_run -f DockerFile .
+docker container run -p 3000:3000 minimal_chat_ollama_runuxt
 
-```bash
-# npm
-npm run preview
 
-# pnpm
-pnpm run preview
 
-# yarn
-yarn preview
 
-# bun
-bun run preview
-```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
