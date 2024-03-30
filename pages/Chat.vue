@@ -47,7 +47,12 @@ const prompt=shallowRef('')
 const questionsAndAnswers=ref([])
 const localModels=[];
 const selectedModel=ref('');
-const messages=[];
+let  messages=[];
+
+ watch(selectedModel, (value) => {
+    questionsAndAnswers.value=[];
+    messages=[];
+  });
 
 
 const response=await GetModels();
