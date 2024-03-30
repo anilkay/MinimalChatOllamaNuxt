@@ -28,15 +28,14 @@
     <v-form ref="form" @submit.prevent="handleSubmit">
 
     <v-row>
-        <v-col cols="12">
+        <v-col cols="10">
         <v-textarea v-model="prompt" label="Write Your Prompt here"></v-textarea>
         </v-col>
-    </v-row>
-    <v-row>
-        <v-col cols="12">
+        <v-col cols="2">
         <v-btn type="submit">Submit</v-btn>
         </v-col>
     </v-row>
+    
     </v-form>
 </v-container>
 </template>
