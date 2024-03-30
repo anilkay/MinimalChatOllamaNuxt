@@ -24,6 +24,12 @@
             </v-card>
         </v-col>
     </v-row>
+
+    <v-row>
+        <v-col cols="12">
+            <v-btn type="button" @click="saveQuestionAndAnswers()">Save Conversation</v-btn>
+        </v-col>
+    </v-row>
     
     <v-form ref="form" @submit.prevent="handleSubmit">
 
@@ -64,6 +70,17 @@ const modelListed= computed(() => {
     });
 });
 
+async function saveQuestionAndAnswers(){
+    console.log(questionsAndAnswers.value);
+    //Download the file as json
+    const element = document.createElement("a");
+    const file = new Blob([JSON.stringify(questionsAndAnswers.value)], {type: 'application/json'});
+    element.href = URL.createObjectURL(file);
+    element.download = "questionsAndAnswers.json";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+    
+}
 
 async function handleSubmit() {
     console.log('submit');
