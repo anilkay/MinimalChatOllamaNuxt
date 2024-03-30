@@ -47,6 +47,7 @@ const prompt=shallowRef('')
 const questionsAndAnswers=ref([])
 const localModels=[];
 const selectedModel=ref('');
+const messages=[];
 
 
 const response=await GetModels();
@@ -62,7 +63,8 @@ const modelListed= computed(() => {
 async function handleSubmit() {
     console.log('submit');
     console.log(prompt.value);
-    let chatResponse=await MakeChatRequest(selectedModel.value,prompt.value)
+    messages.push(prompt.value);
+    let chatResponse=await MakeChatRequest(selectedModel.value,messages)
     console.log(chatResponse);
     let content=chatResponse.data.message.content
 
