@@ -49,7 +49,7 @@
 </template>
 <script setup>
 import { computed } from 'vue';
-import {GetModels} from '../utils/ollamaService.ts'
+import {GetModels,MakeChatRequest} from '../utils/ollamaService.ts'
 
 const prompt=shallowRef('')
 const questionsAndAnswers=ref([])
@@ -67,10 +67,14 @@ const modelListed= computed(() => {
 });
 
 
-function handleSubmit() {
+async function handleSubmit() {
     console.log('submit');
     console.log(prompt.value);
-    questionsAndAnswers.value.push({question:prompt.value,answer:'I am a bot',id:questionsAndAnswers.value.length+1});
+    let chatResponse=await MakeChatRequest(selectedModel.value,prompt.value)
+    console.log(chatResponse);
+    let content=chatResponse.data.message.content
+
+    questionsAndAnswers.value.push({question:prompt.value,answer:content,id:questionsAndAnswers.value.length+1});
     prompt.value='';
 }
 
