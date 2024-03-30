@@ -18,16 +18,9 @@
     
     <v-row>
         <v-col cols="12">
-            <v-card>
-                <v-card-title>Chat</v-card-title>
-                <v-card-text>
-                    <v-list>
-                        <v-list-item v-for="qa in questionsAndAnswers" :key="qa.id">
-                                <v-list-item-title>{{qa.question}}</v-list-item-title>
-                                <v-list-item-subtitle>{{qa.answer}}</v-list-item-subtitle>
-                        </v-list-item>
-                    </v-list>
-                </v-card-text>
+            <v-card  v-for="qa in questionsAndAnswers" :key="qa.id">
+                <v-card-title>      {{qa.question}} </v-card-title>
+                                <v-card-text>{{qa.answer}}</v-card-text>
             </v-card>
         </v-col>
     </v-row>
