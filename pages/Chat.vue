@@ -45,7 +45,6 @@
 </v-container>
 </template>
 <script setup>
-import { computed } from 'vue';
 import {GetModels,MakeChatRequest} from '../utils/ollamaService.ts'
 
 const prompt=shallowRef('')
