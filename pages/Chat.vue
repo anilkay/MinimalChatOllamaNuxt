@@ -60,6 +60,9 @@ let  messages=[];
 
 
 const response=await GetModels();
+if(response.error){
+    response.data=[]
+}
 localModels.value=response.data;
 
 const modelListed= computed(() => {
@@ -85,6 +88,10 @@ async function handleSubmit() {
     console.log(prompt.value);
     messages.push(prompt.value);
     let chatResponse=await MakeChatRequest(selectedModel.value,messages)
+
+    if(chatResponse.error){
+        return;
+    }
     console.log(chatResponse);
     let content=chatResponse.data.message.content
 
