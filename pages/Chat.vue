@@ -45,7 +45,7 @@
 </v-container>
 </template>
 <script setup>
-import {GetModels,MakeChatRequest} from '../utils/ollamaService.ts'
+import {GetModels,MakeChatRequest} from '../utils/ollamaService.js'
 
 const prompt=shallowRef('')
 const questionsAndAnswers=ref([])
