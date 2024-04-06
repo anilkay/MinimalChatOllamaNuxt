@@ -18,10 +18,9 @@
     
     <v-row>
         <v-col cols="12">
-            <v-card  v-for="qa in questionsAndAnswers" :key="qa.id">
-                <v-card-title>      {{qa.question}} </v-card-title>
-                                <v-card-text>{{qa.answer}}</v-card-text>
-            </v-card>
+            <question-answer-comp :questionsAndAnswers="questionsAndAnswers">
+
+            </question-answer-comp>
         </v-col>
     </v-row>
 
