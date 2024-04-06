@@ -2,24 +2,39 @@ const ollamaEndpoint="http://localhost:11434";
 
 export async function GetModels(){
     const GetModelsFullUrl=ollamaEndpoint+"/api/tags";
-    const {data,pending,error,status}=await useFetch(GetModelsFullUrl,{
+    try {
+
+  
+    const data=await $fetch(GetModelsFullUrl,{
         method:"GET",
         headers:{
             "Content-Type":"application/json",
         },
     });
-    return {data: data.value,pending:pending.value,error:error.value,status:status.value};
+    return {data: data,error:false};
+}
+ catch(e){
+    return {data: e,error:true}; 
+ }
 }
 
 export async function MakeChatRequest(modelName,chatMessages){
     const messages=chatMessages.map((message)=>{return {role:"user",content:message}});
     const MakeChatRequestFullUrl=ollamaEndpoint+"/api/chat";
-    const {data,pending,error,status}=await useFetch(MakeChatRequestFullUrl,{
+    try {
+
+   
+    const data=await $fetch(MakeChatRequestFullUrl,{
         method:"POST",
         headers:{
             "Content-Type":"application/json",
         },
         body:JSON.stringify({model:modelName,stream:false,messages:[...messages]}),
     });
-    return {data: data.value,pending:pending.value,error:error.value,status:status.value};
+    return {data: data,error:false};
+
+    }
+    catch(e){
+        return {data: e,error:true};
+    }
 }

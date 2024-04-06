@@ -57,10 +57,11 @@ yarn build
 bun run build
 ```
 
-### docker
+### Docker
+```bash
 docker build -t minimal_chat_ollama_run -f DockerFile .
 docker container run -p 3000:3000 minimal_chat_ollama_runuxt
-
+```
 
 
 

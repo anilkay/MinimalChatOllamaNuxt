@@ -18,10 +18,9 @@
     
     <v-row>
         <v-col cols="12">
-            <v-card  v-for="qa in questionsAndAnswers" :key="qa.id">
-                <v-card-title>      {{qa.question}} </v-card-title>
-                                <v-card-text>{{qa.answer}}</v-card-text>
-            </v-card>
+            <question-answer-comp :questionsAndAnswers="questionsAndAnswers">
+
+            </question-answer-comp>
         </v-col>
     </v-row>
 
@@ -46,8 +45,7 @@
 </v-container>
 </template>
 <script setup>
-import { computed } from 'vue';
-import {GetModels,MakeChatRequest} from '../utils/ollamaService.ts'
+import {GetModels,MakeChatRequest} from '../utils/ollamaService.js'
 
 const prompt=shallowRef('')
 const questionsAndAnswers=ref([])
@@ -62,6 +60,9 @@ let  messages=[];
 
 
 const response=await GetModels();
+if(response.error){
+    response.data=[]
+}
 localModels.value=response.data;
 
 const modelListed= computed(() => {
@@ -87,6 +88,10 @@ async function handleSubmit() {
     console.log(prompt.value);
     messages.push(prompt.value);
     let chatResponse=await MakeChatRequest(selectedModel.value,messages)
+
+    if(chatResponse.error){
+        return;
+    }
     console.log(chatResponse);
     let content=chatResponse.data.message.content
 
