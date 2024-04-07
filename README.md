@@ -60,7 +60,9 @@ bun run build
 ### Docker
 ```bash
 docker build -t minimal_chat_ollama_run -f DockerFile .
-docker container run -p 3000:3000 minimal_chat_ollama_runuxt
+docker container run -p "3000:3000" minimal_chat_ollama_run
+#İf you want to change ollama base url
+docker container run -e "NUXT_PUBLIC_API_BASE_URL=https://localhost:8080"  -p "3000:3000" minimal_chat_ollama_run
 ```
 
 
