@@ -1,6 +1,8 @@
-const ollamaEndpoint="http://localhost:11434";
 
 export async function GetModels(){
+    const config = useRuntimeConfig()
+
+    const ollamaEndpoint=config.public.API_BASE_URL
     const GetModelsFullUrl=ollamaEndpoint+"/api/tags";
     try {
 
@@ -19,6 +21,9 @@ export async function GetModels(){
 }
 
 export async function MakeChatRequest(modelName,chatMessages){
+    const config = useRuntimeConfig()
+    const ollamaEndpoint=config.public.API_BASE_URL
+
     const messages=chatMessages.map((message)=>{return {role:"user",content:message}});
     const MakeChatRequestFullUrl=ollamaEndpoint+"/api/chat";
     try {
