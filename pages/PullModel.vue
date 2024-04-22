@@ -1,5 +1,5 @@
 <template>
-    
+        <v-container>
         <v-row>
             <v-col cols="12">
                 <h1>Pull Model</h1>
@@ -13,7 +13,17 @@
             <v-btn type="button" @click="pullModel()">Save Conversation</v-btn>
         </v-col>
     </v-row>
-    <v-container>
+
+        <v-row>
+            <v-col cols="12">    
+                <v-progress-linear
+                v-if="isProcessing"
+                indeterminate
+                color="primary"
+                ></v-progress-linear>
+            </v-col>
+        </v-row>
+
         <v-row>
             <v-col cols="12">
                 <v-table>
@@ -72,20 +82,16 @@ const pullModel=async()=>{
     if(response.error)
     {
         isProcessing.value=false;
-        console.log("Error in PullModel")
-        console.log(response)
         return;
     }
     else {
-    console.log(response)
+    isProcessing.value=false;
     }
-        
-    localModels.value=await GetModels()
+    await updateModelList();
 }
 
 
 const removeModel=async(modelName)=>{
-    console.log("Remove Model")
     await DeleteModel(modelName)
     await updateModelList();
 }
