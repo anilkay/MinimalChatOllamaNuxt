@@ -43,6 +43,55 @@ export async function MakeChatRequest(modelName,chatMessages){
     }
 }
 
+export async function PullModel(modelName)
+{
+    const ollamaEndpoint=GetApiEndpoint();
+
+    const PullModelFullUrl=ollamaEndpoint+"/api/pull";
+    try {
+
+   
+    const data=await $fetch(PullModelFullUrl,{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json",
+        },
+        body:JSON.stringify({model:modelName,stream:false}),
+    });
+    return {data: data,error:false};
+
+    }
+    catch(e){
+        return {data: e,error:true};
+    }
+
+}
+
+
+export async function DeleteModel(modelName){
+    const ollamaEndpoint=GetApiEndpoint();
+
+    const DeleteModelFullUrl=ollamaEndpoint+"/api/delete";
+    try {
+
+   
+    const data=await $fetch(DeleteModelFullUrl,{
+        method:"DELETE",
+        headers:{
+            "Content-Type":"application/json",
+        },
+        body:JSON.stringify({name:modelName}),
+    });
+    return {data: data,error:false};
+
+    }
+    catch(e){
+        return {data: e,error:true};
+    }
+
+}
+
+
 function GetApiEndpoint(){
     const config = useRuntimeConfig()
     console.log(config.public.API_BASE_URL);
