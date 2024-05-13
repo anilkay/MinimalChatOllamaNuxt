@@ -44,14 +44,14 @@
     </v-form>
 </v-container>
 </template>
-<script setup>
+<script setup lang="ts">
 import {GetModels,MakeChatRequest} from '../utils/ollamaService.js'
 
-const prompt=shallowRef('')
-const questionsAndAnswers=ref([])
+const prompt=shallowRef<string>('')
+const questionsAndAnswers=ref<Array<{id:number,question:string,answer:string}>>([])
 const localModels=[];
-const selectedModel=ref('');
-let  messages=[];
+const selectedModel=ref<string>('');
+let  messages:Array<string>=[];
 
  watch(selectedModel, (value) => {
     questionsAndAnswers.value=[];
@@ -71,7 +71,7 @@ const modelListed= computed(() => {
     });
 });
 
-async function saveQuestionAndAnswers(){
+async function saveQuestionAndAnswers():Promise<void>{
     console.log(questionsAndAnswers.value);
     //Download the file as json
     const element = document.createElement("a");
@@ -84,8 +84,6 @@ async function saveQuestionAndAnswers(){
 }
 
 async function handleSubmit() {
-    console.log('submit');
-    console.log(prompt.value);
     messages.push(prompt.value);
     let chatResponse=await MakeChatRequest(selectedModel.value,messages)
 
