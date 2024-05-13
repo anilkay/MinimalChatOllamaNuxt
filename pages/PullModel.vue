@@ -58,8 +58,8 @@
 <script setup>
 import {PullModel,GetModels,DeleteModel} from '../utils/ollamaService.js'
 
-const modelName=shallowRef('')
-const isProcessing=shallowRef(false);
+const modelName=shallowRef<string>('')
+const isProcessing=shallowRef<boolean>(false);
 const localModels=ref([]);
 
 //add mounted hook
